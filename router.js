@@ -7,15 +7,17 @@ const userController = require('./controllers/userController');
 const adminController = require('./controllers/adminController');
 const transsactionController = require('./controllers/transationController')
 const loginController = require('./controllers/loginController');
+const brownieController = require('./controllers/brownieController');
 
 //Middlewares
 const verifyJWT = require('./middlewares/verifyJWT');
+const verifyAdmin = require('./middlewares/adminVerify')
 
 //Welcome route
 router.get('/', homeController.welcomeController);
 
 //Admin routes
-router.get('/users', adminController.viewUsers);
+router.get('/users', verifyAdmin.verifyAdmin, adminController.viewUsers);
 
 //User routes - public
 router.post('/user/register', userController.registerUser);
@@ -29,5 +31,8 @@ router.get('/user/:userEmail', verifyJWT.checkToken, userController.viewUser);
 //Transaction routes - private
 router.post('/transaction/deposit', verifyJWT.checkToken, transsactionController.depositMoney);
 router.post('/transaction/transfer', verifyJWT.checkToken, transsactionController.transferMoney);
+
+//Brownie routes - private
+router.post('/brownie/add', verifyAdmin.verifyAdmin, brownieController.addBrownie);
 
 module.exports = router;
