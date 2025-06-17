@@ -33,6 +33,10 @@ router.post('/transaction/deposit', verifyJWT.checkToken, transsactionController
 router.post('/transaction/transfer', verifyJWT.checkToken, transsactionController.transferMoney);
 
 //Brownie routes - private
+router.get('/brownies', verifyAdmin.verifyAdmin, brownieController.viewBrownies);
+router.delete('/brownie/delete', verifyAdmin.verifyAdmin, brownieController.deleteBrownie);
+router.post('/brownie/add-flavor', verifyAdmin.verifyAdmin, brownieController.addBrownieFlavor);
 router.post('/brownie/add', verifyAdmin.verifyAdmin, brownieController.addBrownie);
+router.put('/brownie/update', verifyAdmin.verifyAdmin, brownieController.updateBrownie);
 
 module.exports = router;

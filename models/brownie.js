@@ -6,7 +6,13 @@ const Brownie = mongoose.model('Brownie', {
         required: true,
     },
     brownieValue: {
-        type: Double,
+        type: Number,
         required: true
     },
+    brownieQuantity: {
+        type: Number,
+        required: true
+    }
 })
+
+module.exports = Brownie;
