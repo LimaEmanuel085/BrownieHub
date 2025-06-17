@@ -8,6 +8,7 @@ const adminController = require('./controllers/adminController');
 const transsactionController = require('./controllers/transationController')
 const loginController = require('./controllers/loginController');
 const brownieController = require('./controllers/brownieController');
+const buyAndSellController = require('./controllers/buyAndSellController');
 
 //Middlewares
 const verifyJWT = require('./middlewares/verifyJWT');
@@ -38,5 +39,8 @@ router.delete('/brownie/delete', verifyAdmin.verifyAdmin, brownieController.dele
 router.post('/brownie/add-flavor', verifyAdmin.verifyAdmin, brownieController.addBrownieFlavor);
 router.post('/brownie/add', verifyAdmin.verifyAdmin, brownieController.addBrownie);
 router.put('/brownie/update', verifyAdmin.verifyAdmin, brownieController.updateBrownie);
+
+//Buy and Sell routes - private
+router.post('/brownie/buy', verifyAdmin.verifyAdmin, buyAndSellController.buyBrownie);
 
 module.exports = router;
